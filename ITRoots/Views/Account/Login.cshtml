@@ -1,0 +1,91 @@
+﻿@model ITRoots.Models.LoginVM
+@using ITRoots.Resources
+
+@{
+    ViewBag.Title = "Create";
+}
+<style>
+    .login-form {
+        max-width: 600px !important;
+        margin: auto;
+        margin-top: 40px;
+    }
+
+
+    [dir=rtl] {
+    }
+</style>
+
+
+<div class="container main login-form">
+
+    <h2 class="text-center text-success">@Resource.LoginToYourAccount</h2>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    <img style="margin: auto; display: block;" height="100" src="~/Content/user.png" />
+    <br />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @if (Html.ViewData.ModelState.IsValidField("NotActivated"))
+    {
+
+    }
+    else
+    {
+        <span class="text-danger">Please Verify your email first, <a href='@Url.Action("ConfirmEmail")'>click here</a> to verify your account</span>
+    }
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.UserType, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("UserType", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.UserType, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-10">
+            <input type="submit" value="@Resource.Login" class="btn btn-success w-100 form-btn" />
+
+
+        </div>
+    </div>
+    <br />
+
+</div>
+    }
+
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

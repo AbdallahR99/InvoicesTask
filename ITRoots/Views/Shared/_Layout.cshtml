@@ -1,0 +1,83 @@
+﻿@{
+    bool isRtl = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft;
+}
+<!DOCTYPE html>
+<html dir="@(isRtl? "rtl" : "ltr")">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @{
+
+        var user = (ITRoots.Models.UserVM)Session[Constants.LoggedInUserSessionKey];
+    }
+    @{
+        if (isRtl)
+            {
+        <link rel="stylesheet" href="//cdn.rawgit.com/morteza/bootstrap-rtl/v3.3.4/dist/css/bootstrap-rtl.min.css">
+            }
+            
+    }
+
+</head>
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header" style='@(isRtl? "float: right" : "")'>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink(ITRoots.Resources.Resource.ITRootsTask, "Index", "Users", new { area = "" }, new { @class = "navbar-brand"  })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav @(isRtl? "navbar-right" : "navbar-left")">
+                    <li>@Html.ActionLink(ITRoots.Resources.Resource.Roles, "Index", "Roles")</li>
+                    <li>@Html.ActionLink(ITRoots.Resources.Resource.Users_Roles, "Index", "Users_Roles")</li>
+                    <li>@Html.ActionLink(ITRoots.Resources.Resource.Users, "Index", "Users")</li>
+                    <li>@Html.ActionLink(ITRoots.Resources.Resource.Invoices, "Index", "Invoices")</li>
+                </ul>
+                <ul class="nav navbar-nav @(isRtl? "navbar-left p-0" : "navbar-right")">
+                    @if (user == null)
+                    {
+                        <li>@Html.ActionLink(ITRoots.Resources.Resource.Register, "Register", "Account")</li>
+                        <li>@Html.ActionLink(ITRoots.Resources.Resource.Login, "Login", "Account")</li>
+                    }
+                    else
+                    {
+                        <li>
+
+                            @Html.ActionLink(ITRoots.Resources.Resource.Hello + " " + user.Username, "Index", "Users")
+                        </li>
+                        <li>@Html.ActionLink(ITRoots.Resources.Resource.Logout, "Logout", "Account")</li>
+                    }
+
+
+                </ul>
+
+                @Html.Partial("_LanguageMenu")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Abdallah ElRashedy</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datatables")
+    @RenderSection("scripts", required: false)
+
+
+</body>
+</html>

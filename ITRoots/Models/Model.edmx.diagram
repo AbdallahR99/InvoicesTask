@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="481c1271205c432dab733155cc821b9f" Name="Diagram1">
+        <EntityTypeShape EntityType="db_a79052_rootdbModel.Roles" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_a79052_rootdbModel.Users" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_a79052_rootdbModel.Users_Roles" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="db_a79052_rootdbModel.FK__Users_Rol__RoleI__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="db_a79052_rootdbModel.FK__Users_Rol__UserI__38996AB5" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="db_a79052_rootdbModel.Products" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="db_a79052_rootdbModel.Invoices" Width="1.5" PointX="3" PointY="3.75" />
+        <AssociationConnector Association="db_a79052_rootdbModel.FK__Invoices__UserID__36B12243" />
+        <AssociationConnector Association="db_a79052_rootdbModel.FK__Products__Invoic__3D5E1FD2" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

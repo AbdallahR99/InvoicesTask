@@ -1,0 +1,309 @@
+﻿@model ITRoots.Models.InvoiceVM
+@using System.Data.Entity;
+@using System.Linq;
+@using ITRoots.Resources
+@{
+    ViewBag.Title = @Resource.Create;
+}
+
+<div class="container container-sm">
+    <div class="main main-form">
+        <h2 class="text-center text-white py-1">@Resource.AddInvoice</h2>
+
+        <div class="container-fluid bg-white">
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="alert alert-danger" style="display: none" role="alert" id="productsError">
+                        Please enter one product at least
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6 text-center">
+
+                            <div class="w-100">
+                                @Html.DropDownList("UserID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger feedback" })
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="form-group w-100">
+
+                                <input type="text" value="@Model.CreatedDate" disabled class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                    <div class="row">
+                        <div class="form-group col-md-4 px-2">
+                            <label> @Resource.Product </label>
+                            <input type="text" id="product" class="form-control" />
+                            <span class="text-danger feedback" id="productErrorMessage"></span>
+                        </div>
+
+                        <div class="form-group col-md-3 px-2">
+                            <label> @Resource.Qunatity </label>
+                            <input type="number" id="quantity" class="form-control" min="0" max="100000" />
+                            <span class="text-danger feedback" id="qunatityErrorMessage"></span>
+                        </div>
+
+                        <div class="form-group col-md-3 px-2">
+                            <label>@Resource.Price </label>
+                            @*<input type="number" id="price" class="form-control" min="0" max="100000" />*@
+
+
+                            <div class="input-group">
+                                <span class="input-group-addon">@Resource.LE</span>
+                                <input type="number" id="price" class="form-control" min="0" max="100000" />
+                            </div>
+                            <span class="text-danger feedback" id="priceErrorMessage"></span>
+
+
+
+                        </div>
+                        <div class="form-group col-md-2 px-2">
+                            <label style="visibility: hidden;">w </label>
+                            <button class="btn btn-md btn-primary"
+                                    id="addBtn" onclick="addProduct()" type="button">
+                                @Resource.AddProduct
+                            </button>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <table class="table table-striped empty-products" id="productstbl">
+                        <thead>
+                            <tr style=" background: #3D7591;" class="text-white">
+                                <th scope="col">#</th>
+                                <th scope="col">@Resource.Product</th>
+                                <th scope="col">@Resource.Qunatity</th>
+                                <th scope="col">@Resource.Price</th>
+                                <th class="text-center">@Resource.Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                        </tbody>
+                    </table>
+
+
+                </div>
+                <hr style="border-top: 1px solid #3D7591;" class="empty-products" />
+                <h4 class="text-primary empty-products" style="text-align: start">
+                    @Resource.TotalPrice: <span id="totalPrice">0</span>  L.E
+                </h4>
+                <hr />
+
+                <div class="row">
+                    <div class="col-xs-4">
+                        <a href="@Url.Action("Index")" class="btn btn-primary w-100">Back to list</a>
+                    </div>
+                    <div class="col-xs-4">
+
+                        <a href="@Url.Action("Create")" class="btn btn-default w-100">Clear Data</a>
+                    </div>
+                    <div class="col-xs-4">
+                        <input type="button" onclick="sendData()" value="@Resource.Save" class="btn btn-success w-100" />
+                    </div>
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        var rowIdx = 0;
+
+        var productsList = [];
+
+        function addProduct() {
+
+            var isProductValid = true;
+            var product = $("#product").val();
+            var quantity = $("#quantity").val();
+
+            var price = $("#price").val();
+
+            if (product.trim().length == 0) {
+
+                $("#productErrorMessage").text(" Please Enter Product Name");
+                isProductValid = false;
+                return;
+            } else {
+                $("#productErrorMessage").text("");
+                isProductValid = true;
+            }
+
+            if (quantity.trim().length == 0 || quantity == 0) {
+
+                $("#qunatityErrorMessage").text(" Please Enter Quantity ");
+                isProductValid = false;
+                return;
+            } else {
+                $("#qunatityErrorMessage").text("");
+                isProductValid = true;
+            }
+
+            if (price.trim().length == 0 || price == 0) {
+
+                $("#priceErrorMessage").text(" Please Enter Price ");
+                isProductValid = false;
+                return;
+            } else {
+                $("#priceErrorMessage").text("");
+                isProductValid = true;
+            }
+
+            if (isProductValid) {
+                $(".empty-products").show();
+                var productToAdd = `<tr id="R${++rowIdx}">
+                        <td>`+ rowIdx + `</td>
+                        <td>`+ product + `</td>
+                        <td>`+ quantity + `</td>
+                        <td>`+ price + `</td>
+
+                   <td class="text-center">
+                    <a class="text-danger remove"
+                        type="button">
+    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+    </a>
+                    </td>
+                   </tr>`;
+
+                $('#tbody').append(productToAdd);
+
+
+
+              //  productsList.push({ Name: product, Quantity: quantity, Price: price });
+                getTotalQuantity();
+                clearProduct();
+                }
+        };
+        function clearProduct() {
+            $("#product").val('');
+            $("#quantity").val('');
+            $("#price").val('');
+            $("#productsError").hide();
+
+    }
+
+    function getTotalQuantity() {
+        $(".empty-products").show();
+        var items = [];
+        $.each($('#tbody tr'), function () {
+            items.push({
+                Name: $(this).find('td:eq(1)').html(),
+                Quantity: $(this).find('td:eq(2)').html(),
+                Price: $(this).find('td:eq(3)').html()
+            });
+        })
+        var total = items.reduce((total, item) => (parseInt(item.Quantity) * parseInt(item.Price)) + total, 0);
+        if (total == 0) {
+            $(".empty-products").hide();
+        }
+        $("#totalPrice").text(total);
+    }
+
+
+        function sendData() {
+            $("#productsError").hide();
+
+            $.each($('#tbody tr'), function () {
+                productsList.push({
+                    Name: $(this).find('td:eq(1)').html(),
+                    Quantity: $(this).find('td:eq(2)').html(),
+                    Price: $(this).find('td:eq(3)').html()
+                });
+            })
+
+            if (productsList.length>0) {
+                    $.ajax({
+                        url: '@Url.Action("Create")',
+                        method: "POST",
+                        dataType: "json",
+                        data: {
+                            userID: $("#UserID").val(),
+                            products : productsList
+                        }, success: function (data) {
+                            location.href = '@Url.Action("Index")';
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            debugger
+                            console.log("Status: " + textStatus);
+                            console.log("Error: " + errorThrown);
+                        }
+                    })
+            } else {
+                $("#productsError").show();
+
+                    //alert("Not Validation passed");
+                    return false;
+                }
+            }
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            // Denotes total number of rows
+            var rowIdx = 0;
+
+            $("#productsError").hide();
+
+
+            // jQuery button click event to remove a row.
+            $('#tbody').on('click', '.remove', function () {
+
+                // Getting all the rows next to the row
+                // containing the clicked button
+                var child = $(this).closest('tr').nextAll();
+
+                // Iterating across all the rows
+                // obtained to change the index
+                child.each(function () {
+
+                    // Getting <tr> id.
+                    var id = $(this).attr('id');
+
+                    // Getting the <p> inside the .row-index class.
+                    var idx = $(this).children('.row-index').children('p');
+
+                    // Gets the row number from <tr> id.
+                    var dig = parseInt(id.substring(1));
+
+                    // Modifying row index.
+                    idx.html(`Row ${dig - 1}`);
+
+                    // Modifying row id.
+                    $(this).attr('id', `R${dig - 1}`);
+                });
+
+                // Removing the current row.
+                $(this).closest('tr').remove();
+
+                // Decreasing total number of rows by 1.
+                rowIdx--;
+                getTotalQuantity();
+
+            });
+        });
+    </script>
+}

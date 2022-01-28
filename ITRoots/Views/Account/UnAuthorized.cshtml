@@ -1,0 +1,29 @@
+﻿@using ITRoots.Resources
+@{
+    ViewBag.Title = "UnAuthorized";
+}
+
+
+<div class="container main">
+    <div class="jumbotron" style="margin-top: 19px; padding-top: 10px;">
+        <div class="row" style="display: flex; align-items: end;">
+            <div class="col-sm-3">
+                <img src="~/Content/invoice.svg" />
+            </div>
+            <div class="col-sm-9">
+                <h1>@Resource.HomeWelcome</h1>
+              
+                    <p class="lead">
+                        @Resource.UnAuthorizeText
+                    </p>
+
+               
+                <p style=" text-align: end;">
+                <a href='@Url.Action("Index","Users")' class="btn btn-primary btn-lg">@Resource.BackToHome</a></p>
+
+            </div>
+        </div>
+
+    </div>
+
+    </div>

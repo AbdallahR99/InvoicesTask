@@ -1,0 +1,34 @@
+﻿@model ITRoots.Models.Users_Roles
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Users_Roles</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Roles.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Roles.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Users.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Users.FullName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

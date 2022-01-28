@@ -1,0 +1,86 @@
+﻿@using ITRoots.Resources
+@model ITRoots.Models.UserVM
+
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ID)
+    @Html.HiddenFor(model => model.ActivationCode)
+    @Html.HiddenFor(model => model.Password)
+    @Html.HiddenFor(model => model.CreatedDate)
+    <div class="form-group">
+        @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", required = "requird", minlength = 3, maxlength = 100 } })
+            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", required = "requird", minlength = 3, maxlength = 100 } })
+            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", required = "requird", minlength = 3, maxlength = 100, email = "email" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", required = "requird", minlength = 11, maxlength = 11 } })
+            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class=" col-md-4"></div>
+        @*   @Html.LabelFor(model => model.IsEmailConfirmed, htmlAttributes: new { @class = "control-label col-md-4" })*@
+        <div class="col-md-8" style="padding-inline-start: 37px;">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.IsEmailConfirmed)
+                @Html.LabelFor(model => model.IsEmailConfirmed, htmlAttributes: new { @class = "control-label", style = "padding: 0px" })
+                @Html.ValidationMessageFor(model => model.IsEmailConfirmed, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>
+
+    <div class="modal-footer row">
+
+        <div class="col-xs-6">
+            <input type="submit" style="width: 100%;" value="@Resource.Save" class="btn btn-success" />
+        </div>
+        <div class="col-xs-6">
+            <button type="button" style="width: 100%;" class="btn btn-default" data-dismiss="modal">@Resource.Close</button>
+
+        </div>
+    </div>
+}
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

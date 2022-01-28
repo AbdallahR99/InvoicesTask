@@ -1,0 +1,27 @@
+﻿@using ITRoots.Resources
+@model ITRoots.Models.Invoices
+@{
+    Layout = null;
+}
+<h4>
+    Are you sure you want to delete invoice of
+    ( <span class="label label-warning"> @Model.Users.FullName</span> )?
+</h4>
+<br />
+<br />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="modal-footer row">
+
+        <div class="col-xs-6">
+            <input type="submit" style="width: 100%;" value="Delete" class="btn btn-danger" />
+        </div>
+        <div class="col-xs-6">
+            <button type="button" style="width: 100%;" class="btn btn-default" data-dismiss="modal">Close</button>
+
+        </div>
+    </div>
+}

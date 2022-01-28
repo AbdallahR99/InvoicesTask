@@ -1,0 +1,133 @@
+﻿@model IEnumerable<ITRoots.Models.InvoiceVM>
+@using ITRoots.Resources
+@{
+    ViewBag.Title = @Resource.Invoices;
+}
+
+
+<div class="container main">
+    <h2>@Resource.Invoices</h2>
+    <p style="text-align: end;">
+        <a href="@Url.Action("Create")" class="btn btn-primary">@Resource.AddInvoice</a>
+    </p>
+
+    <table class="table table-striped table-bordered dt-responsive nowrap" id="invoicesTable">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.User.FullName)
+                </th>
+                <th>
+                    @Resource.Username
+                </th>
+                <th>
+                    @Resource.NOofProducts
+                </th>
+                <th>
+                    @Resource.TotalPrice
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedDate)
+                </th>
+
+                <th>Actions</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.FullName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.Username)
+                    </td>
+                    <td>
+                        @item.Products.Count()
+                    </td>
+                    <td>
+                        @item.TotalPrice @Resource.LE
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                    </td>
+                    <td>
+                        <a class="btn btn-info btn-sm" id="@item.ID" href="@Url.Action("Edit")/@item.ID"> @Resource.Edit</a>
+                        <a class="btn btn-default btn-sm" id="@item.ID" href="@Url.Action("Details")/@item.ID"> @Resource.Details </a>
+                        <a class="btn btn-danger btn-sm" id="@item.ID" onclick="Delete(this.id)"> @Resource.Delete </a>
+                        
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="deleteModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title text-white">  @Resource.Delete  @Resource.Invoice</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+<script>
+        $(document).ready(function () {
+            $('#invoicesTable').DataTable({
+                dom: 'Bfrtip',
+                   oLanguage: {
+                    sSearch: "@Resource.Search"
+                },
+                language: {
+                    emptyTable: "@Resource.EmptyTable",
+                    info: "@Resource.Showing _START_ @Resource.To _END_ @Resource.Of _TOTAL_ @Resource.Entries",
+                    infoEmpty: "@Resource.Showing 0 @Resource.To 0  @Resource.Of 0 @Resource.Entries",
+                    infoFiltered: "(@Resource.FilteredFrom _MAX_ @Resource.TotalEntries)",
+                    infoPostFix: "",
+                    thousands: ",",
+                    lengthMenu: "@Resource.Show _MENU_ @Resource.EntriesMenu",
+                    loadingRecords: "@Resource.Loading...",
+                    processing: "@Resource.Processing...",
+                    search: "@Resource.Search:",
+                    zeroRecords: "@Resource.RecordsNotFound",
+                    paginate: {
+                        previous: "@Resource.Previous",
+                        next: "@Resource.Next",
+                    }
+                },
+                buttons:
+                    [
+                        { extend: 'pdf', className: 'btn btn-success btn-sm', text: '@Resource.PDF' },
+                        { extend: 'excel', className: 'btn btn-default btn-sm', text: '@Resource.Excel'  }
+                    ]
+            });
+        });
+
+         function Delete(ID) {
+            $.get("@Url.Action("Delete", "Invoices")/" + ID,
+                function (data) {
+                   $('.modal-body').html(data);
+                });
+             $("#deleteModal").modal("show");
+            }
+
+
+</script>
+
+}
+
+
