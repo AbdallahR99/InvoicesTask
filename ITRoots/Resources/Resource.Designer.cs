@@ -124,11 +124,29 @@ namespace ITRoots.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Back to list.
+        /// </summary>
+        public static string BackToList {
+            get {
+                return ResourceManager.GetString("BackToList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to please check your inbox..
         /// </summary>
         public static string CheckInbox {
             get {
                 return ResourceManager.GetString("CheckInbox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click here.
+        /// </summary>
+        public static string ClickHere {
+            get {
+                return ResourceManager.GetString("ClickHere", resourceCulture);
             }
         }
         
@@ -259,11 +277,56 @@ namespace ITRoots.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email already exist.
+        /// </summary>
+        public static string EmailExist {
+            get {
+                return ResourceManager.GetString("EmailExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email not found.
+        /// </summary>
+        public static string EmailNotFound {
+            get {
+                return ResourceManager.GetString("EmailNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No data available in table.
         /// </summary>
         public static string EmptyTable {
             get {
                 return ResourceManager.GetString("EmptyTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please Enter Price.
+        /// </summary>
+        public static string EnterPrice {
+            get {
+                return ResourceManager.GetString("EnterPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please Enter Product Name.
+        /// </summary>
+        public static string EnterProductName {
+            get {
+                return ResourceManager.GetString("EnterProductName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please Enter Quantity.
+        /// </summary>
+        public static string EnterQuantity {
+            get {
+                return ResourceManager.GetString("EnterQuantity", resourceCulture);
             }
         }
         
@@ -304,7 +367,7 @@ namespace ITRoots.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FullName.
+        ///   Looks up a localized string similar to Full Name.
         /// </summary>
         public static string FullName {
             get {
@@ -484,11 +547,29 @@ namespace ITRoots.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter one product at least.
+        /// </summary>
+        public static string NoProducts {
+            get {
+                return ResourceManager.GetString("NoProducts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not Validation passed.
         /// </summary>
         public static string NotValidationPassed {
             get {
                 return ResourceManager.GetString("NotValidationPassed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please Verify your email first.
+        /// </summary>
+        public static string NotVerified {
+            get {
+                return ResourceManager.GetString("NotVerified", resourceCulture);
             }
         }
         
@@ -525,6 +606,15 @@ namespace ITRoots.Resources {
         public static string PhoneNumber {
             get {
                 return ResourceManager.GetString("PhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PhoneNumber already exist.
+        /// </summary>
+        public static string PhoneNumberExist {
+            get {
+                return ResourceManager.GetString("PhoneNumberExist", resourceCulture);
             }
         }
         
@@ -588,6 +678,15 @@ namespace ITRoots.Resources {
         public static string Register {
             get {
                 return ResourceManager.GetString("Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear Data.
+        /// </summary>
+        public static string ResetData {
+            get {
+                return ResourceManager.GetString("ResetData", resourceCulture);
             }
         }
         
@@ -664,6 +763,15 @@ namespace ITRoots.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to to verify your account.
+        /// </summary>
+        public static string ToVerify {
+            get {
+                return ResourceManager.GetString("ToVerify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You do not have permission to access this page. Please Login as admin to access the page..
         /// </summary>
         public static string UnAuthorizeText {
@@ -696,6 +804,15 @@ namespace ITRoots.Resources {
         public static string Username {
             get {
                 return ResourceManager.GetString("Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username already exist.
+        /// </summary>
+        public static string UsernameExist {
+            get {
+                return ResourceManager.GetString("UsernameExist", resourceCulture);
             }
         }
         

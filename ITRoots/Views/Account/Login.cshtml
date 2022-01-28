@@ -39,7 +39,7 @@
     }
     else
     {
-        <span class="text-danger">Please Verify your email first, <a href='@Url.Action("ConfirmEmail")'>click here</a> to verify your account</span>
+        <span class="text-danger">@Resource.NotVerified, <a href='@Url.Action("ConfirmEmail")'>@Resource.ClickHere</a> @Resource.ToVerify</span>
     }
     <div class="form-group row">
         @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })

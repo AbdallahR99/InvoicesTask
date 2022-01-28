@@ -44,13 +44,32 @@ namespace ITRoots.Controllers
         {
             if (ModelState.IsValid)
             {
+                var isUserExist = _context.Users.Any(a => a.Username == userVM.Username);
+                if (isUserExist)
+                {
+                    ModelState.AddModelError("", Resources.Resource.UsernameExist);
+                    return View(userVM);
+                }
+
+                var isEmailExist = _context.Users.Any(a => a.Email == userVM.Email);
+                if (isEmailExist)
+                {
+                    ModelState.AddModelError("", Resources.Resource.EmailExist);
+                    return View(userVM);
+                }
+
+                var isPhoneNumberExist = _context.Users.Any(a => a.PhoneNumber == userVM.PhoneNumber);
+                if (isPhoneNumberExist)
+                {
+                    ModelState.AddModelError("", Resources.Resource.PhoneNumberExist);
+                    return View(userVM);
+                }
                 Users user = mapper.Map<Users>(userVM);
                 user.CreatedDate = DateTime.Now;
                 user.ActivationCode = new Random().Next(1111, 99999).ToString();
-                user.Password = EncodeToBase64.EncodePasswordToBase64(user.Password);
 
                 _context.SaveUser(userVM.ID, userVM.FullName, userVM.Username,
-                    userVM.Password, userVM.Email, userVM.PhoneNumber, userVM.IsEmailConfirmed, true);
+                    EncodeToBase64.EncodePasswordToBase64(userVM.Password), userVM.Email, userVM.PhoneNumber, userVM.IsEmailConfirmed, true);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -82,6 +101,26 @@ namespace ITRoots.Controllers
       
             if (ModelState.IsValid)
             {
+                var isUserExist = _context.Users.Any(a => a.Username == userVM.Username);
+                if (isUserExist)
+                {
+                    ModelState.AddModelError("", Resources.Resource.UsernameExist);
+                    return View(userVM);
+                }
+
+                var isEmailExist = _context.Users.Any(a => a.Email == userVM.Email);
+                if (isEmailExist)
+                {
+                    ModelState.AddModelError("", Resources.Resource.EmailExist);
+                    return View(userVM);
+                }
+
+                var isPhoneNumberExist = _context.Users.Any(a => a.PhoneNumber == userVM.PhoneNumber);
+                if (isPhoneNumberExist)
+                {
+                    ModelState.AddModelError("", Resources.Resource.PhoneNumberExist);
+                    return View(userVM);
+                }
                 _context.SaveUser(userVM.ID, userVM.FullName, userVM.Username,
                    userVM.Password, userVM.Email, userVM.PhoneNumber, userVM.IsEmailConfirmed, false);
                 _context.SaveChanges();
@@ -114,6 +153,7 @@ namespace ITRoots.Controllers
             if (user == null)
                 return HttpNotFound();
 
+            DeleteChildren(id);
             _context.DeleteUser(id);
             _context.SaveChanges();
             return RedirectToAction("Index");
@@ -127,5 +167,19 @@ namespace ITRoots.Controllers
             }
             base.Dispose(disposing);
         }
+
+        private void DeleteChildren(int userId)
+        {
+            List<Invoices> userInvoices = _context.Invoices.Where(a => a.UserID == userId).ToList();
+            foreach (var invoice in userInvoices)
+            {
+                _context.Products.RemoveRange(invoice.Products);
+                _context.Invoices.Remove(invoice);
+            }
+            List<Users_Roles> userRoles = _context.Users_Roles.Where(a => a.UserId == userId).ToList();
+            _context.Users_Roles.RemoveRange(userRoles);
+            _context.SaveChanges();
+        }
     }
+    
 }

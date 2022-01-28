@@ -49,7 +49,7 @@ namespace ITRoots.Controllers
 
                 if (!user.IsEmailConfirmed)
                 {
-                    ModelState.AddModelError("NotActivated", "Please Verify your email first, <a href=''>click here</a> to verify your account");
+                    ModelState.AddModelError("NotActivated", "");
                     TempData["Email"] = user.Email;
                     return View(loginVM);
                 }
@@ -80,21 +80,21 @@ namespace ITRoots.Controllers
                 var isUserExist = _context.Users.Any(a=>a.Username == registerVM.Username);
                 if (isUserExist)
                 {
-                    ModelState.AddModelError("", "Username already exist ");
+                    ModelState.AddModelError("", Resources.Resource.UsernameExist);
                     return View(registerVM);
                 }
 
                 var isEmailExist = _context.Users.Any(a => a.Email == registerVM.Email);
                 if (isEmailExist)
                 {
-                    ModelState.AddModelError("", "Email already exist ");
+                    ModelState.AddModelError("", Resources.Resource.EmailExist);
                     return View(registerVM);
                 }
 
                 var isPhoneNumberExist = _context.Users.Any(a => a.PhoneNumber == registerVM.PhoneNumber);
                 if (isPhoneNumberExist)
                 {
-                    ModelState.AddModelError("", "PhoneNumber already exist ");
+                    ModelState.AddModelError("", Resources.Resource.PhoneNumberExist);
                     return View(registerVM);
                 }
 
@@ -148,7 +148,7 @@ namespace ITRoots.Controllers
                 var user = _context.Users.FirstOrDefault(a => a.Email == confirmEmailVM.Email);
                 if (user == null)
                 {
-                    ModelState.AddModelError("", "Email not found ");
+                    ModelState.AddModelError("", Resources.Resource.EmailNotFound);
                     return View(confirmEmailVM);
                 }
 

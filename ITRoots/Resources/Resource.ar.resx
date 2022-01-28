@@ -138,8 +138,14 @@
   <data name="BackToHome" xml:space="preserve">
     <value>العودة إلى الرئيسية</value>
   </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>العودة الى القائمة</value>
+  </data>
   <data name="CheckInbox" xml:space="preserve">
     <value>من فضلك تفقد من صندوق الوارد لديك</value>
+  </data>
+  <data name="ClickHere" xml:space="preserve">
+    <value>قم بالضغط هنا</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>إلغاء</value>
@@ -183,8 +189,23 @@
   <data name="Email" xml:space="preserve">
     <value>البريد الإلكتروني</value>
   </data>
+  <data name="EmailExist" xml:space="preserve">
+    <value>البريد الإلكتروني مسجل بالفعل</value>
+  </data>
+  <data name="EmailNotFound" xml:space="preserve">
+    <value>البريد الإلكتروني غير موجود</value>
+  </data>
   <data name="EmptyTable" xml:space="preserve">
     <value>لا توجد بيانات متاحة بالجدول</value>
+  </data>
+  <data name="EnterPrice" xml:space="preserve">
+    <value>ادخل السعر</value>
+  </data>
+  <data name="EnterProductName" xml:space="preserve">
+    <value>ادخل اسم المنتج</value>
+  </data>
+  <data name="EnterQuantity" xml:space="preserve">
+    <value>ادخل الكمية</value>
   </data>
   <data name="Entries" xml:space="preserve">
     <value>عنصر</value>
@@ -199,7 +220,7 @@
     <value>تمت التصفية من</value>
   </data>
   <data name="FullName" xml:space="preserve">
-    <value>الاسم الثلاثي</value>
+    <value>الاسم بالكامل</value>
   </data>
   <data name="Hello" xml:space="preserve">
     <value>مرحباً</value>
@@ -258,8 +279,14 @@
   <data name="NOofProducts" xml:space="preserve">
     <value>عدد العناصر</value>
   </data>
+  <data name="NoProducts" xml:space="preserve">
+    <value>أدخل منتج واحد على الأقل</value>
+  </data>
   <data name="NotValidationPassed" xml:space="preserve">
     <value>البيانات غير صحيحة</value>
+  </data>
+  <data name="NotVerified" xml:space="preserve">
+    <value>البريد الإلكتروني غير مفعل</value>
   </data>
   <data name="Of" xml:space="preserve">
     <value>من</value>
@@ -272,6 +299,9 @@
   </data>
   <data name="PhoneNumber" xml:space="preserve">
     <value>رقم الهاتف</value>
+  </data>
+  <data name="PhoneNumberExist" xml:space="preserve">
+    <value>رقم الهاتف مسجل بالفعل</value>
   </data>
   <data name="Previous" xml:space="preserve">
     <value>السابق</value>
@@ -293,6 +323,9 @@
   </data>
   <data name="Register" xml:space="preserve">
     <value>تسجيل</value>
+  </data>
+  <data name="ResetData" xml:space="preserve">
+    <value>حذف التغييرات</value>
   </data>
   <data name="Roles" xml:space="preserve">
     <value>المجموعات</value>
@@ -318,6 +351,9 @@
   <data name="TotalPrice" xml:space="preserve">
     <value>السعر الإجمالي</value>
   </data>
+  <data name="ToVerify" xml:space="preserve">
+    <value>لتفعيل حسابك</value>
+  </data>
   <data name="UnAuthorizeText" xml:space="preserve">
     <value>ليس لديك صلاحية للوصول إلى هذه الصفحة. من فضلك قم بتسجيل الدخول مع صلاحية أدمن للوصول إلى هذه الصفحة</value>
   </data>
@@ -329,6 +365,9 @@
   </data>
   <data name="Username" xml:space="preserve">
     <value>اسم المستخدم</value>
+  </data>
+  <data name="UsernameExist" xml:space="preserve">
+    <value>اسم المستخدم مستخدم من قبل</value>
   </data>
   <data name="Users" xml:space="preserve">
     <value>المستخدمين</value>

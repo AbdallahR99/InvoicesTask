@@ -46,9 +46,9 @@
                             <thead>
                                 <tr style=" background: #3D7591;" class="text-white">
                                     <th scope="col">#</th>
-                                    <th scope="col">Product</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Price</th>
+                                    <th scope="col">@Resource.Product</th>
+                                    <th scope="col">@Resource.Quantity</th>
+                                    <th scope="col">@Resource.Price</th>
                                 </tr>
                             </thead>
                             <tbody id="tbody">
@@ -83,13 +83,13 @@
                     </div>
                     <hr style="border-top: 1px solid #3D7591;" />
                     <h4 class="text-primary empty-products" style="text-align: start">
-                        Total Price: <span id="totalPrice">0</span>  L.E
+                        @Resource.TotalPrice: <span id="totalPrice">0</span>  @Resource.LE
                     </h4>
                     <hr />
 
                     <div class="row">
                         <div class="col-xs-12">
-                            <a href="@Url.Action("Index")" class="btn btn-primary w-100">Back to list</a>
+                            <a href="@Url.Action("Index")" class="btn btn-primary w-100">@Resource.BackToList</a>
                         </div>
 
                     </div>

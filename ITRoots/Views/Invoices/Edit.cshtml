@@ -3,12 +3,12 @@
 @using System.Linq;
 @using ITRoots.Resources
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = @Resource.Edit;
 }
 
 <div class="container container-sm">
     <div class="main main-form">
-        <h2 class="text-center text-white py-1">Edit</h2>
+        <h2 class="text-center text-white py-1">@Resource.Edit</h2>
 
         <div class="container-fluid bg-white">
 
@@ -21,7 +21,7 @@
 
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="alert alert-danger" style="display: none" role="alert" id="productsError">
-                        Please enter one product at least
+                        @Resource.NoProducts
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6 text-center">
@@ -46,24 +46,24 @@
 
                     <div class="row">
                         <div class="form-group col-md-4 px-2">
-                            <label> Product </label>
+                            <label> @Resource.Product </label>
                             <input type="text" id="product" class="form-control" />
                             <span class="text-danger feedback" id="productErrorMessage"></span>
                         </div>
 
                         <div class="form-group col-md-3 px-2">
-                            <label> Qunatity </label>
+                            <label> @Resource.Qunatity </label>
                             <input type="number" id="quantity" class="form-control" min="0" max="100000" />
                             <span class="text-danger feedback" id="qunatityErrorMessage"></span>
                         </div>
 
                         <div class="form-group col-md-3 px-2">
-                            <label> Price </label>
+                            <label> @Resource.Price </label>
                             @*<input type="number" id="price" class="form-control" min="0" max="100000" />*@
 
 
                             <div class="input-group">
-                                <span class="input-group-addon">L.E</span>
+                                <span class="input-group-addon">@Resource.LE</span>
                                 <input type="number" id="price" class="form-control" min="0" max="100000" />
                             </div>
                             <span class="text-danger feedback" id="priceErrorMessage"></span>
@@ -75,7 +75,7 @@
                             <label style="visibility: hidden;">w </label>
                             <button class="btn btn-md btn-primary"
                                     id="addBtn" onclick="addProduct()" type="button">
-                                Add Product
+                                @Resource.AddProduct
                             </button>
                         </div>
                     </div>
@@ -137,14 +137,14 @@
 
                 <div class="row">
                     <div class="col-xs-4">
-                        <a href="@Url.Action("Index")" class="btn btn-primary w-100">Back to list</a>
+                        <a href="@Url.Action("Index")" class="btn btn-primary w-100">@Resource.BackToList</a>
                     </div>
                     <div class="col-xs-4">
 
-                        <a href="@Url.Action("Edit")" class="btn btn-default w-100">Clear Data</a>
+                        <a href="@Url.Action("Edit")" class="btn btn-default w-100">@Resource.ResetData</a>
                     </div>
                     <div class="col-xs-4">
-                        <input type="button" onclick="sendData()" value="Save" class="btn btn-success w-100" />
+                        <input type="button" onclick="sendData()" value="@Resource.Save" class="btn btn-success w-100" />
                     </div>
                 </div>
             }
@@ -159,7 +159,7 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-    <script>
+<script>
         var rowIdx = @Model.Products.Count() - 1;
 
         var productsList = [];
@@ -173,7 +173,7 @@
 
             if (product.trim().length == 0) {
 
-                $("#productErrorMessage").text(" Please Enter Product Name");
+                $("#productErrorMessage").text("@Resource.EnterProductName");
                 isProductValid = false;
                 return;
             } else {
@@ -183,7 +183,7 @@
 
             if (quantity.trim().length == 0 || quantity == 0) {
 
-                $("#qunatityErrorMessage").text(" Please Enter Quantity ");
+                $("#qunatityErrorMessage").text("@Resource.EnterQuantity");
                 isProductValid = false;
                 return;
             } else {
@@ -193,7 +193,7 @@
 
             if (price.trim().length == 0 || price == 0) {
 
-                $("#priceErrorMessage").text(" Please Enter Price ");
+                $("#priceErrorMessage").text("@Resource.EnterPrice");
                 isProductValid = false;
                 return;
             } else {
@@ -295,7 +295,7 @@
                 }
             }
 
-    </script>
+</script>
 
     <script>
         $(document).ready(function () {

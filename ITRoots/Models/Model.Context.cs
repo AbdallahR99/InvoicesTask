@@ -24,9 +24,11 @@ namespace ITRoots.Models
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            throw new UnintentionalCodeFirstException();
+            //throw new UnintentionalCodeFirstException();
+            modelBuilder.Entity<Invoices>().HasMany<Products>(t => t.Products).WithOptional(d => d.Invoices);
+
         }
-    
+
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Users_Roles> Users_Roles { get; set; }
